@@ -1,0 +1,460 @@
+.navigation-links3-nav {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.navigation-links3-text1 {
+  margin-left: var(--dl-space-space-twounits);
+}
+.navigation-links3-text2 {
+  margin-left: var(--dl-space-space-twounits);
+}
+.navigation-links3-text3 {
+  margin-left: var(--dl-space-space-twounits);
+}
+
+
+
+
+
+
+
+
+@media(max-width: 767px) {
+  .navigation-links3-nav {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .navigation-links3-text {
+    margin-bottom: var(--dl-space-space-unit);
+  }
+  .navigation-links3-text1 {
+    margin-left: 0;
+    margin-bottom: var(--dl-space-space-unit);
+  }
+  .navigation-links3-text2 {
+    margin-left: 0;
+    margin-bottom: var(--dl-space-space-unit);
+  }
+  .navigation-links3-text3 {
+    margin-left: 0;
+    margin-bottom: var(--dl-space-space-unit);
+  }
+}
+
+.crab-runners-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #000000;
+}
+.crab-runners-header {
+  width: 100%;
+  height: 82px;
+  display: flex;
+  max-width: 100%;
+  align-items: center;
+  padding-top: var(--dl-space-space-twounits);
+  padding-left: var(--dl-space-space-threeunits);
+  padding-right: var(--dl-space-space-threeunits);
+  padding-bottom: var(--dl-space-space-twounits);
+  justify-content: space-between;
+  background-color: #ffffff;
+}
+.crab-runners-image {
+  width: 79px;
+  height: 66px;
+  object-fit: cover;
+}
+.crab-runners-nav {
+  display: flex;
+}
+.crab-runners-icon {
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+  margin-right: var(--dl-space-space-twounits);
+}
+.crab-runners-icon02 {
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+  margin-right: var(--dl-space-space-twounits);
+}
+.crab-runners-icon04 {
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+}
+.crab-runners-burger-menu {
+  display: none;
+}
+.crab-runners-icon06 {
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+  display: none;
+}
+.crab-runners-mobile-menu {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100vh;
+  display: none;
+  padding: 32px;
+  z-index: 100;
+  position: absolute;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #fff;
+}
+.crab-runners-nav1 {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.crab-runners-container1 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--dl-space-space-threeunits);
+  justify-content: space-between;
+}
+.crab-runners-image1 {
+  height: 2rem;
+}
+.crab-runners-close-mobile-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.crab-runners-icon08 {
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+}
+.crab-runners-icon10 {
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+  margin-right: var(--dl-space-space-twounits);
+}
+.crab-runners-icon12 {
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+  margin-right: var(--dl-space-space-twounits);
+}
+.crab-runners-icon14 {
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+}
+.crab-runners-hero {
+  width: 100%;
+  height: 783px;
+  display: flex;
+  padding: var(--dl-space-space-threeunits);
+  position: relative;
+  min-height: 80vh;
+  align-items: center;
+  flex-direction: column;
+  background-size: cover;
+  justify-content: center;
+  background-image: linear-gradient(90deg, rgb(192, 36, 37) 0.00%,rgba(240, 203, 53, 0.5) 100.00%),url("public/external/sneakpeak1-1500h.png");
+}
+.crab-runners-text {
+  color: var(--dl-color-gray-white);
+  font-size: 3rem;
+}
+.crab-runners-text1 {
+  color: #ffffff;
+  font-style: normal;
+  font-weight: 700;
+  padding-top: var(--dl-space-space-unit);
+  padding-bottom: var(--dl-space-space-unit);
+}
+.crab-runners-btn-group {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.crab-runners-link {
+  font-size: 0.75rem;
+  transition: 0.3s;
+  padding-top: var(--dl-space-space-unit);
+  border-width: 0px;
+  padding-left: var(--dl-space-space-twounits);
+  padding-right: var(--dl-space-space-twounits);
+  animation-name: tada;
+  padding-bottom: var(--dl-space-space-unit);
+  text-transform: uppercase;
+  animation-delay: 1s;
+  text-decoration: none;
+  animation-duration: 1s;
+  animation-direction: normal;
+  animation-iteration-count: 1;
+  animation-timing-function: ease;
+}
+.crab-runners-link:hover {
+  transform: scale(1.02);
+}
+.crab-runners-button {
+  color: var(--dl-color-gray-white);
+  font-size: 0.75rem;
+  transition: 0.3s;
+  margin-left: var(--dl-space-space-unit);
+  padding-top: var(--dl-space-space-unit);
+  border-color: var(--dl-color-gray-white);
+  padding-left: var(--dl-space-space-twounits);
+  padding-right: var(--dl-space-space-twounits);
+  animation-name: tada;
+  padding-bottom: var(--dl-space-space-unit);
+  text-transform: uppercase;
+  animation-delay: 1s;
+  background-color: transparent;
+  animation-duration: 1s;
+  animation-direction: normal;
+  animation-iteration-count: 1;
+  animation-timing-function: ease;
+}
+.crab-runners-button:hover {
+  transform: scale(1.02);
+}
+.crab-runners-stats {
+  width: 100%;
+  height: 282px;
+  display: flex;
+  padding: var(--dl-space-space-threeunits);
+  max-width: var(--dl-size-size-maxwidth);
+  justify-content: center;
+}
+.crab-runners-container2 {
+  flex: 0 0 auto;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-self: center;
+  align-items: flex-start;
+  justify-content: center;
+}
+.crab-runners-stat {
+  height: var(--dl-size-size-xlarge);
+  display: flex;
+  padding: var(--dl-space-space-twounits);
+  align-items: center;
+  flex-direction: column;
+}
+.crab-runners-image2 {
+  width: var(--dl-size-size-small);
+  height: var(--dl-size-size-small);
+  object-fit: cover;
+}
+.crab-runners-text2 {
+  color: rgb(255, 255, 255);
+  font-size: 1.15rem;
+  margin-top: var(--dl-space-space-halfunit);
+  text-align: center;
+}
+.crab-runners-text3 {
+  color: var(--dl-color-gray-700);
+  font-size: 0.75rem;
+  margin-top: var(--dl-space-space-halfunit);
+  text-align: center;
+}
+.crab-runners-stat1 {
+  width: 272px;
+  height: var(--dl-size-size-xlarge);
+  display: flex;
+  padding: var(--dl-space-space-twounits);
+  align-items: center;
+  flex-direction: column;
+}
+.crab-runners-icon16 {
+  fill: #D9D9D9;
+  width: var(--dl-size-size-small);
+  height: var(--dl-size-size-small);
+}
+.crab-runners-text4 {
+  color: #ffffff;
+  font-size: 1.15rem;
+  margin-top: var(--dl-space-space-halfunit);
+  text-align: center;
+}
+.crab-runners-text5 {
+  color: var(--dl-color-gray-700);
+  font-size: 0.75rem;
+  margin-top: var(--dl-space-space-halfunit);
+  text-align: center;
+}
+.crab-runners-stat2 {
+  width: 214px;
+  height: var(--dl-size-size-xlarge);
+  display: flex;
+  padding: var(--dl-space-space-twounits);
+  align-items: center;
+  flex-direction: column;
+}
+.crab-runners-icon18 {
+  fill: #D9D9D9;
+  width: var(--dl-size-size-small);
+  height: var(--dl-size-size-small);
+}
+.crab-runners-text6 {
+  color: #ffffff;
+  font-size: 1.15rem;
+  margin-top: var(--dl-space-space-halfunit);
+  text-align: center;
+}
+.crab-runners-text7 {
+  color: var(--dl-color-gray-700);
+  font-size: 0.75rem;
+  margin-top: var(--dl-space-space-halfunit);
+  text-align: center;
+}
+.crab-runners-footer {
+  width: 100%;
+  display: flex;
+  max-width: 100%;
+  align-items: center;
+  padding-top: var(--dl-space-space-twounits);
+  border-color: #272727;
+  border-width: 10px;
+  padding-left: var(--dl-space-space-threeunits);
+  padding-right: var(--dl-space-space-threeunits);
+  padding-bottom: var(--dl-space-space-twounits);
+  justify-content: space-between;
+  background-color: #1b1a1a;
+}
+.crab-runners-image3 {
+  height: 2rem;
+  object-fit: cover;
+}
+.crab-runners-text8 {
+  color: rgb(255, 255, 255);
+}
+.crab-runners-icon-group2 {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.crab-runners-icon20 {
+  fill: #ffffff;
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+  margin-right: var(--dl-space-space-twounits);
+}
+.crab-runners-icon22 {
+  fill: #ffffff;
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+  margin-right: var(--dl-space-space-twounits);
+}
+.crab-runners-icon24 {
+  fill: #ffffff;
+  width: 24px;
+  height: var(--dl-size-size-xsmall);
+}
+@media(max-width: 991px) {
+  .crab-runners-icon06 {
+    display: flex;
+  }
+  .crab-runners-hero {
+    flex-direction: column;
+  }
+  .crab-runners-text {
+    text-align: center;
+  }
+}
+@media(max-width: 767px) {
+  .crab-runners-header {
+    padding-left: var(--dl-space-space-twounits);
+    padding-right: var(--dl-space-space-twounits);
+  }
+  .crab-runners-nav {
+    display: none;
+  }
+  .crab-runners-burger-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .crab-runners-hero {
+    padding-left: var(--dl-space-space-twounits);
+    padding-right: var(--dl-space-space-twounits);
+  }
+  .crab-runners-stats {
+    padding-left: var(--dl-space-space-twounits);
+    padding-right: var(--dl-space-space-twounits);
+  }
+  .crab-runners-stat {
+    padding: var(--dl-space-space-unit);
+  }
+  .crab-runners-text2 {
+    text-align: center;
+  }
+  .crab-runners-stat1 {
+    padding: var(--dl-space-space-unit);
+  }
+  .crab-runners-text4 {
+    text-align: center;
+  }
+  .crab-runners-stat2 {
+    padding: var(--dl-space-space-unit);
+  }
+  .crab-runners-text6 {
+    text-align: center;
+  }
+  .crab-runners-footer {
+    padding-left: var(--dl-space-space-twounits);
+    padding-right: var(--dl-space-space-twounits);
+  }
+  .crab-runners-text8 {
+    text-align: center;
+    margin-left: var(--dl-space-space-unit);
+    margin-right: var(--dl-space-space-unit);
+  }
+}
+@media(max-width: 479px) {
+  .crab-runners-header {
+    padding: var(--dl-space-space-unit);
+  }
+  .crab-runners-icon-group {
+    display: none;
+  }
+  .crab-runners-mobile-menu {
+    padding: 16px;
+  }
+  .crab-runners-hero {
+    width: 100%;
+    padding: var(--dl-space-space-twounits);
+    padding-top: var(--dl-space-space-twounits);
+    padding-left: var(--dl-space-space-unit);
+    padding-right: var(--dl-space-space-unit);
+  }
+  .crab-runners-btn-group {
+    flex-direction: column;
+  }
+  .crab-runners-button {
+    margin-top: var(--dl-space-space-unit);
+    margin-left: 0px;
+  }
+  .crab-runners-stats {
+    align-items: center;
+    padding-top: var(--dl-space-space-twounits);
+    padding-left: var(--dl-space-space-unit);
+    padding-right: var(--dl-space-space-unit);
+    flex-direction: column;
+    padding-bottom: var(--dl-space-space-twounits);
+  }
+  .crab-runners-footer {
+    padding: var(--dl-space-space-unit);
+    flex-direction: column;
+  }
+  .crab-runners-image3 {
+    margin-bottom: var(--dl-space-space-unit);
+  }
+  .crab-runners-text8 {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: var(--dl-space-space-unit);
+  }
+}

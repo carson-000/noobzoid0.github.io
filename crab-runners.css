@@ -7,20 +7,31 @@
 .navigation-links3-text1 {
   margin-left: var(--dl-space-space-twounits);
 }
+.navigation-links3-navlink {
+  margin-left: var(--dl-space-space-twounits);
+  text-decoration: none;
+}
 .navigation-links3-text2 {
   margin-left: var(--dl-space-space-twounits);
 }
-.navigation-links3-text3 {
-  margin-left: var(--dl-space-space-twounits);
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width: 991px) {
+  .navigation-links3-root-class-name15 {
+    margin-right: var(--dl-space-space-sixunits);
+  }
 }
-
-
-
-
-
-
-
-
 @media(max-width: 767px) {
   .navigation-links3-nav {
     align-items: flex-start;
@@ -33,11 +44,11 @@
     margin-left: 0;
     margin-bottom: var(--dl-space-space-unit);
   }
-  .navigation-links3-text2 {
+  .navigation-links3-navlink {
     margin-left: 0;
     margin-bottom: var(--dl-space-space-unit);
   }
-  .navigation-links3-text3 {
+  .navigation-links3-text2 {
     margin-left: 0;
     margin-bottom: var(--dl-space-space-unit);
   }
@@ -57,6 +68,7 @@
   width: 100%;
   height: 82px;
   display: flex;
+  position: relative;
   max-width: 100%;
   align-items: center;
   padding-top: var(--dl-space-space-twounits);
@@ -74,24 +86,44 @@
 .crab-runners-nav {
   display: flex;
 }
+.crab-runners-icon-group {
+  border: 2px dashed rgba(120, 120, 120, 0.4);
+}
+.crab-runners-container1 {
+  top: -9px;
+  flex: 0 0 auto;
+  right: 0px;
+  width: 337px;
+  height: 100px;
+  display: flex;
+  position: absolute;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+}
+.crab-runners-link {
+  display: contents;
+}
 .crab-runners-icon {
-  width: var(--dl-size-size-xsmall);
-  height: var(--dl-size-size-xsmall);
-  margin-right: var(--dl-space-space-twounits);
+  width: 24px;
+  height: 24px;
+  text-decoration: none;
 }
-.crab-runners-icon02 {
-  width: var(--dl-size-size-xsmall);
-  height: var(--dl-size-size-xsmall);
-  margin-right: var(--dl-space-space-twounits);
+.crab-runners-link1 {
+  display: contents;
 }
-.crab-runners-icon04 {
-  width: var(--dl-size-size-xsmall);
-  height: var(--dl-size-size-xsmall);
+.crab-runners-image1 {
+  flex: 0;
+  width: 31px;
+  height: 24px;
+  object-fit: cover;
+  margin-left: var(--dl-space-space-threeunits);
+  text-decoration: none;
 }
 .crab-runners-burger-menu {
   display: none;
 }
-.crab-runners-icon06 {
+.crab-runners-icon02 {
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
   display: none;
@@ -114,14 +146,14 @@
   align-items: flex-start;
   flex-direction: column;
 }
-.crab-runners-container1 {
+.crab-runners-container2 {
   width: 100%;
   display: flex;
   align-items: center;
   margin-bottom: var(--dl-space-space-threeunits);
   justify-content: space-between;
 }
-.crab-runners-image1 {
+.crab-runners-image2 {
   height: 2rem;
 }
 .crab-runners-close-mobile-menu {
@@ -129,23 +161,35 @@
   align-items: center;
   justify-content: center;
 }
+.crab-runners-icon04 {
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+}
+.crab-runners-icon06 {
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+  margin-right: var(--dl-space-space-twounits);
+}
 .crab-runners-icon08 {
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
+  margin-right: var(--dl-space-space-twounits);
 }
 .crab-runners-icon10 {
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
-  margin-right: var(--dl-space-space-twounits);
 }
-.crab-runners-icon12 {
-  width: var(--dl-size-size-xsmall);
-  height: var(--dl-size-size-xsmall);
-  margin-right: var(--dl-space-space-twounits);
-}
-.crab-runners-icon14 {
-  width: var(--dl-size-size-xsmall);
-  height: var(--dl-size-size-xsmall);
+.crab-runners-warningbanner {
+  width: 100%;
+  border: 2px dashed rgba(120, 120, 120, 0.4);
+  display: none;
+  max-width: var(--dl-size-size-maxwidth);
+  align-items: center;
+  padding-top: var(--dl-space-space-twounits);
+  padding-left: var(--dl-space-space-threeunits);
+  padding-right: var(--dl-space-space-threeunits);
+  padding-bottom: var(--dl-space-space-twounits);
+  justify-content: space-between;
 }
 .crab-runners-hero {
   width: 100%;
@@ -165,7 +209,7 @@
   font-size: 3rem;
 }
 .crab-runners-text1 {
-  color: #ffffff;
+  color: rgb(255, 255, 255);
   font-style: normal;
   font-weight: 700;
   padding-top: var(--dl-space-space-unit);
@@ -176,7 +220,7 @@
   align-items: center;
   flex-direction: row;
 }
-.crab-runners-link {
+.crab-runners-link2 {
   font-size: 0.75rem;
   transition: 0.3s;
   padding-top: var(--dl-space-space-unit);
@@ -193,7 +237,7 @@
   animation-iteration-count: 1;
   animation-timing-function: ease;
 }
-.crab-runners-link:hover {
+.crab-runners-link2:hover {
   transform: scale(1.02);
 }
 .crab-runners-button {
@@ -220,13 +264,14 @@
 }
 .crab-runners-stats {
   width: 100%;
-  height: 282px;
+  height: 288px;
   display: flex;
-  padding: var(--dl-space-space-threeunits);
   max-width: var(--dl-size-size-maxwidth);
+  padding-top: var(--dl-space-space-threeunits);
+  padding-bottom: var(--dl-space-space-threeunits);
   justify-content: center;
 }
-.crab-runners-container2 {
+.crab-runners-container3 {
   flex: 0 0 auto;
   width: 100%;
   height: 100px;
@@ -236,13 +281,14 @@
   justify-content: center;
 }
 .crab-runners-stat {
+  width: 500px;
   height: var(--dl-size-size-xlarge);
   display: flex;
   padding: var(--dl-space-space-twounits);
   align-items: center;
   flex-direction: column;
 }
-.crab-runners-image2 {
+.crab-runners-image3 {
   width: var(--dl-size-size-small);
   height: var(--dl-size-size-small);
   object-fit: cover;
@@ -260,14 +306,14 @@
   text-align: center;
 }
 .crab-runners-stat1 {
-  width: 272px;
+  width: 500px;
   height: var(--dl-size-size-xlarge);
   display: flex;
   padding: var(--dl-space-space-twounits);
   align-items: center;
   flex-direction: column;
 }
-.crab-runners-icon16 {
+.crab-runners-icon12 {
   fill: #D9D9D9;
   width: var(--dl-size-size-small);
   height: var(--dl-size-size-small);
@@ -285,14 +331,14 @@
   text-align: center;
 }
 .crab-runners-stat2 {
-  width: 214px;
+  width: 500px;
   height: var(--dl-size-size-xlarge);
   display: flex;
   padding: var(--dl-space-space-twounits);
   align-items: center;
   flex-direction: column;
 }
-.crab-runners-icon18 {
+.crab-runners-icon14 {
   fill: #D9D9D9;
   width: var(--dl-size-size-small);
   height: var(--dl-size-size-small);
@@ -309,6 +355,44 @@
   margin-top: var(--dl-space-space-halfunit);
   text-align: center;
 }
+.crab-runners-container4 {
+  width: 100%;
+  height: 457px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.crab-runners-slider {
+  width: 798px;
+  height: 404px;
+  display: inline-block;
+}
+.crab-runners-slider-slide {
+  display: flex;
+  background-size: 100%;
+  background-image: url("public/external/beach-mapimg-500h.png");
+}
+.crab-runners-slider-slide1 {
+  display: flex;
+  background-size: 100%;
+  background-image: url("public/external/crab-shopimg-500h.png");
+}
+.crab-runners-slider-slide2 {
+  display: flex;
+  background-size: 100%;
+  background-image: url("public/external/chill-roomimg-500h.png");
+}
+.crab-runners-slider-pagination {
+  display: block;
+}
+.crab-runners-slider-button-prev {
+  fill: var(--dl-color-gray-black);
+  color: #ffffff;
+}
+.crab-runners-slider-button-next {
+  fill: var(--dl-color-gray-black);
+  color: #ffffff;
+}
 .crab-runners-footer {
   width: 100%;
   display: flex;
@@ -323,38 +407,42 @@
   justify-content: space-between;
   background-color: #1b1a1a;
 }
-.crab-runners-image3 {
+.crab-runners-image4 {
   height: 2rem;
   object-fit: cover;
 }
 .crab-runners-text8 {
   color: rgb(255, 255, 255);
 }
-.crab-runners-icon-group2 {
+.crab-runners-container5 {
+  flex: 0 0 auto;
+  width: 110px;
+  height: 100px;
   display: flex;
   align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
 }
-.crab-runners-icon20 {
-  fill: #ffffff;
-  width: var(--dl-size-size-xsmall);
-  height: var(--dl-size-size-xsmall);
-  margin-right: var(--dl-space-space-twounits);
+.crab-runners-link3 {
+  display: contents;
 }
-.crab-runners-icon22 {
-  fill: #ffffff;
-  width: var(--dl-size-size-xsmall);
-  height: var(--dl-size-size-xsmall);
-  margin-right: var(--dl-space-space-twounits);
-}
-.crab-runners-icon24 {
-  fill: #ffffff;
+.crab-runners-icon16 {
   width: 24px;
-  height: var(--dl-size-size-xsmall);
+  height: 24px;
+  text-decoration: none;
+}
+.crab-runners-link4 {
+  display: contents;
+}
+.crab-runners-image5 {
+  flex: 0;
+  width: 31px;
+  height: 24px;
+  object-fit: cover;
+  margin-left: var(--dl-space-space-threeunits);
+  text-decoration: none;
 }
 @media(max-width: 991px) {
-  .crab-runners-icon06 {
+  .crab-runners-icon02 {
     display: flex;
   }
   .crab-runners-hero {
@@ -362,6 +450,9 @@
   }
   .crab-runners-text {
     text-align: center;
+  }
+  .crab-runners-slider {
+    height: 390px;
   }
 }
 @media(max-width: 767px) {
@@ -372,10 +463,17 @@
   .crab-runners-nav {
     display: none;
   }
+  .crab-runners-container1 {
+    display: none;
+  }
   .crab-runners-burger-menu {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  .crab-runners-warningbanner {
+    padding-left: var(--dl-space-space-twounits);
+    padding-right: var(--dl-space-space-twounits);
   }
   .crab-runners-hero {
     padding-left: var(--dl-space-space-twounits);
@@ -403,6 +501,9 @@
   .crab-runners-text6 {
     text-align: center;
   }
+  .crab-runners-slider {
+    height: 242px;
+  }
   .crab-runners-footer {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
@@ -422,6 +523,9 @@
   }
   .crab-runners-mobile-menu {
     padding: 16px;
+  }
+  .crab-runners-warningbanner {
+    padding: var(--dl-space-space-unit);
   }
   .crab-runners-hero {
     width: 100%;
@@ -445,11 +549,14 @@
     flex-direction: column;
     padding-bottom: var(--dl-space-space-twounits);
   }
+  .crab-runners-slider {
+    height: 162px;
+  }
   .crab-runners-footer {
     padding: var(--dl-space-space-unit);
     flex-direction: column;
   }
-  .crab-runners-image3 {
+  .crab-runners-image4 {
     margin-bottom: var(--dl-space-space-unit);
   }
   .crab-runners-text8 {

@@ -101,7 +101,7 @@
 }
 @media(max-width: 479px) {
   .home-container1 {
-    width: 302px;
+    width: 100%;
     height: 268px;
   }
   .home-button {

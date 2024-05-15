@@ -5,8 +5,18 @@
   min-height: 100vh;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .ban-appeal-container2 {
   display: contents;
+}
+.ban-appeal-navlink {
+  display: contents;
+}
+.ban-appeal-text {
+  color: #155ec6;
+  text-decoration: none;
+}
+.ban-appeal-text1 {
+  padding-top: var(--dl-space-space-fourunits);
 }

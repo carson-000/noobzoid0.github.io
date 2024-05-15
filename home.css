@@ -1,0 +1,113 @@
+.home-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+  background-image: linear-gradient(90deg, rgb(192, 36, 37) 0.00%,rgb(240, 203, 53) 100.00%);
+}
+.home-text {
+  padding-top: var(--dl-space-space-twounits);
+  animation-name: pulse;
+  animation-delay: 0.5s;
+  animation-duration: 1s;
+  animation-direction: normal;
+  animation-iteration-count: 1;
+  animation-timing-function: ease;
+}
+.home-text1 {
+  padding-top: var(--dl-space-space-oneandhalfunits);
+  animation-name: pulse;
+  animation-delay: 0.5s;
+  animation-duration: 1s;
+  animation-direction: normal;
+  animation-iteration-count: 1;
+  animation-timing-function: ease;
+}
+.home-container1 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-top: var(--dl-space-space-twounits);
+  justify-content: center;
+}
+.home-button {
+  width: 403px;
+  height: 459px;
+  font-style: normal;
+  text-align: center;
+  font-weight: 700;
+  padding-top: 0px;
+  border-width: 5px;
+  padding-left: 0px;
+  border-radius: var(--dl-radius-radius-radius8);
+  animation-name: pulse;
+  animation-delay: 0.5s;
+  background-color: #218fd4;
+  animation-duration: 1s;
+  animation-direction: normal;
+  animation-iteration-count: 1;
+  animation-timing-function: ease;
+}
+.home-navlink {
+  width: 403px;
+  height: 459px;
+  display: flex;
+  align-items: center;
+  padding-top: 0px;
+  border-width: 5px;
+  padding-left: 0px;
+  border-radius: var(--dl-radius-radius-radius8);
+  animation-name: pulse;
+  animation-delay: 0.5s;
+  justify-content: center;
+  text-decoration: none;
+  background-color: #d85d1e;
+  animation-duration: 1s;
+  animation-direction: normal;
+  animation-iteration-count: 1;
+  animation-timing-function: ease;
+}
+.home-text4 {
+  font-style: normal;
+  font-weight: 700;
+}
+@media(max-width: 991px) {
+  .home-container1 {
+    width: 748px;
+    height: 475px;
+  }
+  .home-button {
+    height: 309px;
+  }
+  .home-navlink {
+    height: 310px;
+  }
+}
+@media(max-width: 767px) {
+  .home-container1 {
+    width: 440px;
+    height: 267px;
+  }
+  .home-button {
+    height: 249px;
+  }
+  .home-navlink {
+    height: 248px;
+    margin-bottom: 0px;
+  }
+}
+@media(max-width: 479px) {
+  .home-container1 {
+    width: 100%;
+    height: 268px;
+  }
+  .home-button {
+    height: 176px;
+  }
+  .home-navlink {
+    height: 175px;
+  }
+}

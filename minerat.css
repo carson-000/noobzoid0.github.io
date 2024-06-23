@@ -8,3 +8,8 @@
 .minerat-text {
   align-self: center;
 }
+.minerat-image {
+  width: 1025px;
+  height: 251px;
+  object-fit: cover;
+}

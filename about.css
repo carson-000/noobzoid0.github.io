@@ -39,10 +39,10 @@
   .navigation-links3-root-class-name12 {
     margin-right: var(--dl-space-space-sixunits);
   }
-  .navigation-links3-root-class-name15 {
+  .navigation-links3-root-class-name14 {
     margin-right: var(--dl-space-space-sixunits);
   }
-  .navigation-links3-root-class-name14 {
+  .navigation-links3-root-class-name15 {
     margin-right: var(--dl-space-space-sixunits);
   }
   .navigation-links3-root-class-name18 {
@@ -211,15 +211,6 @@
 }
 .about-text3 {
   color: #ff0000;
-}
-.about-text5 {
-  padding-top: var(--dl-space-space-sixunits);
-}
-.about-link2 {
-  color: #1285ce;
-  font-size: 25px;
-  padding-top: var(--dl-space-space-unit);
-  text-decoration: none;
 }
 @media(max-width: 991px) {
   .about-icon02 {

@@ -137,7 +137,8 @@
             <h2>Player Dashboard Login</h2>
             <div id="message"></div>
             <form id="login-form">
-                <input type="text" id="custom-id" placeholder="Enter your Custom ID" required>
+                <input type="email" id="email" placeholder="Enter your Email" required>
+                <input type="password" id="password" placeholder="Enter your Password" required>
                 <button type="submit">Login</button>
             </form>
         </div>
@@ -172,7 +173,8 @@
         const loginSection = document.getElementById('login-section');
         const dashboard = document.getElementById('dashboard');
         const loginForm = document.getElementById('login-form');
-        const customIdInput = document.getElementById('custom-id');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
         const messageDiv = document.getElementById('message');
         const playerIdSpan = document.getElementById('player-id');
         const bansList = document.getElementById('bans-list');
@@ -187,10 +189,11 @@
         // Event Listener for Login Form
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const customId = customIdInput.value.trim();
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
 
-            if (!customId) {
-                showMessage('Please enter a valid Custom ID.', 'error');
+            if (!email || !password) {
+                showMessage('Please enter a valid Email and Password.', 'error');
                 return;
             }
 
@@ -206,7 +209,7 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ customPlayerId: customId })
+                    body: JSON.stringify({ email, password })
                 });
 
                 if (!response.ok) {
@@ -215,7 +218,7 @@
                 }
 
                 const data = await response.json();
-                console.log(data);
+                console.log("Raw response data:", data);
 
                 // Display the dashboard
                 loginSection.style.display = 'none';
@@ -237,7 +240,8 @@
                     bansList.innerHTML = '<p>No Bans! Thanks for keeping Crab Runners safe!</p>';
                 }
 
-                if (data.username && data.username.length > 0) {
+                // Populate Username
+                if (data.username) {
                     playerIdSpan.textContent = `${data.username}!`;
                 }
 
@@ -290,7 +294,8 @@
         // Logout Functionality
         logoutButton.addEventListener('click', () => {
             // Clear input and data
-            customIdInput.value = '';
+            emailInput.value = '';
+            passwordInput.value = '';
             bansList.innerHTML = '';
             currencyList.innerHTML = '';
             playerIdSpan.textContent = '';

@@ -14,7 +14,7 @@
 
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-image: linear-gradient(60deg, rgb(184, 67, 67), rgb(199, 126, 126));
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -23,10 +23,11 @@
 
         /* Container */
         .container {
-            background-color: #fff;
+            background-image: linear-gradient(120deg, rgb(255, 81, 0), rgb(230, 176, 28));
             padding: 20px 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            border: 2px solid #000000;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.664);
             width: 400px;
         }
 
@@ -118,8 +119,9 @@
 
         /* Error Message */
         .error {
-            color: red;
+            color: rgb(255, 217, 0);
             margin-bottom: 15px;
+            font-weight: 999;
         }
 
         /* Success Message */
@@ -133,15 +135,22 @@
 
     <div class="container">
         <!-- Login Form -->
-        <div id="login-section">
-            <h2>Player Dashboard Login</h2>
+        <div id="login-section" style="text-align: center;">
+            <h2 style="font-size: 18px; margin-bottom: 20px; color: #fff;">Login</h2>
             <div id="message"></div>
             <form id="login-form">
                 <input type="email" id="email" placeholder="Enter your Email" required>
                 <input type="password" id="password" placeholder="Enter your Password" required>
+                <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                    <input type="checkbox" id="remember-me" style="transform: scale(1.2); margin-right: 5px; margin-top: 0; vertical-align: middle; label: 'Remember Me';">
+                    <label for="remember-me" style="margin-bottom: 15px;margin-left: 4px;">Remember Me</label>
+                </div>                
                 <button type="submit">Login</button>
             </form>
         </div>
+        
+        
+        
 
         <!-- Dashboard -->
         <div id="dashboard" style="display: none;">
@@ -182,100 +191,137 @@
         const tabButtons = document.querySelectorAll('.tab-button');
         const tabContents = document.querySelectorAll('.tab-content');
         const logoutButton = document.getElementById('logout-button');
-
+        const rememberMeCheckbox = document.getElementById('remember-me');
+    
         // Constants
         const WORKER_URL = 'https://playfab.noobzoidthecrab.workers.dev/';
+    
+        // On page load, check for saved credentials
+        window.onload = () => {
+            const savedEmail = localStorage.getItem('email');
+            const savedPassword = localStorage.getItem('password');
+            if (savedEmail) {
+                emailInput.value = savedEmail;
+            }
+            if (savedPassword) {
+                passwordInput.value = savedPassword;
+            }
+            if (savedEmail && savedPassword) {
+                autoLogin(savedEmail, savedPassword);
+            }
+        };
+    
+        // Auto login function
+        async function autoLogin(email, password) {
+    try {
+        // Clear previous messages and data
+        showMessage('');
+        bansList.innerHTML = '';
+        currencyList.innerHTML = '';
 
+        // Send POST request to Cloudflare Worker
+        const response = await fetch(WORKER_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Failed to fetch player data.');
+        }
+
+        const data = await response.json();
+        console.log("Raw response data:", data);
+
+        // Display the dashboard
+        loginSection.style.display = 'none';
+        dashboard.style.display = 'block';
+
+        // Populate Bans
+        if (data.bans && data.bans.length > 0) {
+            data.bans.forEach(ban => {
+                const banDiv = document.createElement('div');
+                banDiv.classList.add('list-item');
+                banDiv.innerHTML = `
+                    <h4 style="color: white;">Reason: ${ban.reason}</h4>
+                    <p>Ban Date: ${ban.banDate}</p>
+                    <p>Hours Until Unbanned: ${ban.hoursUntilUnbanned}</p>
+                `;
+                bansList.appendChild(banDiv);
+            });
+        } else {
+            bansList.innerHTML = '<p>No bans lol</p>';
+        }
+
+        // Populate Username
+        if (data.username) {
+            playerIdSpan.textContent = `${data.username}!`;
+        }
+
+        // Populate Currency
+        if (data.currency && Object.keys(data.currency).length > 0) {
+            for (const [currencyCode, amount] of Object.entries(data.currency)) {
+                const currencyDiv = document.createElement('div');
+                currencyDiv.classList.add('list-item');
+                currencyDiv.innerHTML = `
+                    <h4>Currency: ${currencyCode}</h4>
+                    <p>Amount: ${amount}</p>
+                `;
+                currencyList.appendChild(currencyDiv);
+            }
+        } else {
+            currencyList.innerHTML = '<p>No currency found.</p>';
+        }
+
+    } catch (error) {
+        // Show detailed ban error if applicable
+        if (error.message.includes("Account is banned")) {
+            showMessage(`Error: ${error.message}`, 'error');
+            bansList.innerHTML = `<div class="list-item"><h4>${error.message}</h4></div>`;
+        } else {
+            showMessage(`Error: ${error.message}`, 'error');
+        }
+    }
+}
+    
         // Event Listener for Login Form
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = emailInput.value.trim();
             const password = passwordInput.value.trim();
-
+    
             if (!email || !password) {
                 showMessage('Please enter a valid Email and Password.', 'error');
                 return;
             }
-
-            try {
-                // Clear previous messages and data
-                showMessage('');
-                bansList.innerHTML = '';
-                currencyList.innerHTML = '';
-
-                // Send POST request to Cloudflare Worker
-                const response = await fetch(WORKER_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ email, password })
-                });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error || 'Failed to fetch player data.');
-                }
-
-                const data = await response.json();
-                console.log("Raw response data:", data);
-
-                // Display the dashboard
-                loginSection.style.display = 'none';
-                dashboard.style.display = 'block';
-
-                // Populate Bans
-                if (data.bans && data.bans.length > 0) {
-                    data.bans.forEach(ban => {
-                        const banDiv = document.createElement('div');
-                        banDiv.classList.add('list-item');
-                        banDiv.innerHTML = `
-                            <h4>Reason: ${ban.reason}</h4>
-                            <p>Ban Date: ${ban.banDate}</p>
-                            <p>Hours Until Unbanned: ${ban.hoursUntilUnbanned}</p>
-                        `;
-                        bansList.appendChild(banDiv);
-                    });
-                } else {
-                    bansList.innerHTML = '<p>No Bans! Thanks for keeping Crab Runners safe!</p>';
-                }
-
-                // Populate Username
-                if (data.username) {
-                    playerIdSpan.textContent = `${data.username}!`;
-                }
-
-                // Populate Currency
-                if (data.currency && Object.keys(data.currency).length > 0) {
-                    for (const [currencyCode, amount] of Object.entries(data.currency)) {
-                        const currencyDiv = document.createElement('div');
-                        currencyDiv.classList.add('list-item');
-                        currencyDiv.innerHTML = `
-                            <h4>Currency: ${currencyCode}</h4>
-                            <p>Amount: ${amount}</p>
-                        `;
-                        currencyList.appendChild(currencyDiv);
-                    }
-                } else {
-                    currencyList.innerHTML = '<p>No currency found.</p>';
-                }
-
-            } catch (error) {
-                showMessage(`Error: ${error.message}`, 'error');
+    
+            // Call the autoLogin function with inputted credentials
+            await autoLogin(email, password);
+    
+            // Save credentials if "Remember Me" is checked
+            if (rememberMeCheckbox.checked) {
+                localStorage.setItem('email', email);
+                localStorage.setItem('password', password);
+            } else {
+                localStorage.removeItem('email');
+                localStorage.removeItem('password');
             }
         });
-
+    
         // Function to Show Messages
         function showMessage(message, type = '') {
             if (type === 'error') {
-                messageDiv.innerHTML = `<p class="error">${message}</p>`;
+                alert(message);
             } else if (type === 'success') {
                 messageDiv.innerHTML = `<p class="success">${message}</p>`;
             } else {
                 messageDiv.innerHTML = '';
             }
         }
-
+    
         // Tab Navigation
         tabButtons.forEach(button => {
             button.addEventListener('click', () => {
@@ -290,7 +336,7 @@
                 document.getElementById(tab).classList.add('active');
             });
         });
-
+    
         // Logout Functionality
         logoutButton.addEventListener('click', () => {
             // Clear input and data
@@ -299,12 +345,14 @@
             bansList.innerHTML = '';
             currencyList.innerHTML = '';
             playerIdSpan.textContent = '';
-            // Hide dashboard and show login
+            localStorage.removeItem('email');
+            localStorage.removeItem('password');
             dashboard.style.display = 'none';
             loginSection.style.display = 'block';
             showMessage('Logged out successfully.', 'success');
         });
     </script>
+    
 
 </body>
 </html>

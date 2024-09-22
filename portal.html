@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayFab Player Dashboard</title>
+    <style>
+        /* Basic Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Container */
+        .container {
+            background-color: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        /* Login Form */
+        #login-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #login-form input {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #login-form button {
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #login-form button:hover {
+            background-color: #218838;
+        }
+
+        /* Tabs */
+        .tabs {
+            margin-top: 20px;
+        }
+
+        .tab-buttons {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab-buttons button {
+            flex: 1;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: none;
+            border-right: 1px solid #ddd;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .tab-buttons button:last-child {
+            border-right: none;
+        }
+
+        .tab-buttons button.active {
+            background-color: #fff;
+            border-bottom: 2px solid #28a745;
+            font-weight: bold;
+        }
+
+        .tab-content {
+            padding: 20px;
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Bans and Currency Lists */
+        .list-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #eef;
+            border-radius: 4px;
+        }
+
+        .list-item h4 {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .list-item p {
+            margin-bottom: 3px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        /* Error Message */
+        .error {
+            color: red;
+            margin-bottom: 15px;
+        }
+
+        /* Success Message */
+        .success {
+            color: green;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Login Form -->
+        <div id="login-section">
+            <h2>Player Dashboard Login</h2>
+            <div id="message"></div>
+            <form id="login-form">
+                <input type="text" id="custom-id" placeholder="Enter your Custom ID" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+
+        <!-- Dashboard -->
+        <div id="dashboard" style="display: none;">
+            <h2>Welcome, <span id="player-id"></span></h2>
+            <div class="tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="bans">Bans</button>
+                    <button class="tab-button" data-tab="shop">Shop</button>
+                </div>
+                <div class="tab-content active" id="bans">
+                    <h3>Bans</h3>
+                    <div id="bans-list">
+                        <!-- Bans will be displayed here -->
+                    </div>
+                </div>
+                <div class="tab-content" id="shop">
+                    <h3>Shop</h3>
+                    <div id="currency-list">
+                        <!-- Currency will be displayed here -->
+                    </div>
+                </div>
+            </div>
+            <button id="logout-button" style="margin-top: 20px; padding: 10px; background-color: #dc3545; color: #fff; border: none; border-radius: 4px; cursor: pointer;">Logout</button>
+        </div>
+    </div>
+
+    <script>
+        // Selecting Elements
+        const loginSection = document.getElementById('login-section');
+        const dashboard = document.getElementById('dashboard');
+        const loginForm = document.getElementById('login-form');
+        const customIdInput = document.getElementById('custom-id');
+        const messageDiv = document.getElementById('message');
+        const playerIdSpan = document.getElementById('player-id');
+        const bansList = document.getElementById('bans-list');
+        const currencyList = document.getElementById('currency-list');
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const logoutButton = document.getElementById('logout-button');
+
+        // Constants
+        const WORKER_URL = 'https://playfab.noobzoidthecrab.workers.dev/';
+
+        // Event Listener for Login Form
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const customId = customIdInput.value.trim();
+
+            if (!customId) {
+                showMessage('Please enter a valid Custom ID.', 'error');
+                return;
+            }
+
+            try {
+                // Clear previous messages and data
+                showMessage('');
+                bansList.innerHTML = '';
+                currencyList.innerHTML = '';
+
+                // Send POST request to Cloudflare Worker
+                const response = await fetch(WORKER_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ customPlayerId: customId })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Failed to fetch player data.');
+                }
+
+                const data = await response.json();
+                console.log(data);
+
+                // Display the dashboard
+                loginSection.style.display = 'none';
+                dashboard.style.display = 'block';
+
+                // Populate Bans
+                if (data.bans && data.bans.length > 0) {
+                    data.bans.forEach(ban => {
+                        const banDiv = document.createElement('div');
+                        banDiv.classList.add('list-item');
+                        banDiv.innerHTML = `
+                            <h4>Reason: ${ban.reason}</h4>
+                            <p>Ban Date: ${ban.banDate}</p>
+                            <p>Hours Until Unbanned: ${ban.hoursUntilUnbanned}</p>
+                        `;
+                        bansList.appendChild(banDiv);
+                    });
+                } else {
+                    bansList.innerHTML = '<p>No Bans! Thanks for keeping Crab Runners safe!</p>';
+                }
+
+                if (data.username && data.username.length > 0) {
+                    playerIdSpan.textContent = `${data.username}!`;
+                }
+
+                // Populate Currency
+                if (data.currency && Object.keys(data.currency).length > 0) {
+                    for (const [currencyCode, amount] of Object.entries(data.currency)) {
+                        const currencyDiv = document.createElement('div');
+                        currencyDiv.classList.add('list-item');
+                        currencyDiv.innerHTML = `
+                            <h4>Currency: ${currencyCode}</h4>
+                            <p>Amount: ${amount}</p>
+                        `;
+                        currencyList.appendChild(currencyDiv);
+                    }
+                } else {
+                    currencyList.innerHTML = '<p>No currency found.</p>';
+                }
+
+            } catch (error) {
+                showMessage(`Error: ${error.message}`, 'error');
+            }
+        });
+
+        // Function to Show Messages
+        function showMessage(message, type = '') {
+            if (type === 'error') {
+                messageDiv.innerHTML = `<p class="error">${message}</p>`;
+            } else if (type === 'success') {
+                messageDiv.innerHTML = `<p class="success">${message}</p>`;
+            } else {
+                messageDiv.innerHTML = '';
+            }
+        }
+
+        // Tab Navigation
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                // Hide all tab contents
+                tabContents.forEach(content => content.classList.remove('active'));
+                // Add active class to the clicked button
+                button.classList.add('active');
+                // Show the corresponding tab content
+                const tab = button.getAttribute('data-tab');
+                document.getElementById(tab).classList.add('active');
+            });
+        });
+
+        // Logout Functionality
+        logoutButton.addEventListener('click', () => {
+            // Clear input and data
+            customIdInput.value = '';
+            bansList.innerHTML = '';
+            currencyList.innerHTML = '';
+            playerIdSpan.textContent = '';
+            // Hide dashboard and show login
+            dashboard.style.display = 'none';
+            loginSection.style.display = 'block';
+            showMessage('Logged out successfully.', 'success');
+        });
+    </script>
+
+</body>
+</html>

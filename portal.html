@@ -3,356 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlayFab Player Dashboard</title>
-    <style>
-        /* Basic Reset */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    <title>Crab Runners Dashboard</title>
 
+    <style>
         body {
-            font-family: Arial, sans-serif;
-            background-image: linear-gradient(60deg, rgb(184, 67, 67), rgb(199, 126, 126));
-            min-height: 100vh;
-            display: flex;
+            background-color: black;
             align-items: center;
             justify-content: center;
-        }
-
-        /* Container */
-        .container {
-            background-image: linear-gradient(120deg, rgb(255, 81, 0), rgb(230, 176, 28));
-            padding: 20px 30px;
-            border-radius: 20px;
-            border: 2px solid #000000;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.664);
-            width: 400px;
-        }
-
-        /* Login Form */
-        #login-form {
+            /*align everything in the center middle*/
             display: flex;
-            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
         }
 
-        #login-form input {
+        .formLabel {
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
             padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-
-        #login-form button {
-            padding: 10px;
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        #login-form button:hover {
-            background-color: #218838;
-        }
-
-        /* Tabs */
-        .tabs {
-            margin-top: 20px;
-        }
-
-        .tab-buttons {
-            display: flex;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .tab-buttons button {
-            flex: 1;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border: none;
-            border-right: 1px solid #ddd;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .tab-buttons button:last-child {
-            border-right: none;
-        }
-
-        .tab-buttons button.active {
-            background-color: #fff;
-            border-bottom: 2px solid #28a745;
-            font-weight: bold;
-        }
-
-        .tab-content {
-            padding: 20px;
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Bans and Currency Lists */
-        .list-item {
-            margin-bottom: 15px;
-            padding: 10px;
-            background-color: #eef;
-            border-radius: 4px;
-        }
-
-        .list-item h4 {
-            margin-bottom: 5px;
-            color: #333;
-        }
-
-        .list-item p {
-            margin-bottom: 3px;
-            color: #555;
-            font-size: 14px;
-        }
-
-        /* Error Message */
-        .error {
-            color: rgb(255, 217, 0);
-            margin-bottom: 15px;
-            font-weight: 999;
-        }
-
-        /* Success Message */
-        .success {
-            color: green;
-            margin-bottom: 15px;
         }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <!-- Login Form -->
-        <div id="login-section" style="text-align: center;">
-            <h2 style="font-size: 18px; margin-bottom: 20px; color: #fff;">Login</h2>
-            <div id="message"></div>
-            <form id="login-form">
-                <input type="email" id="email" placeholder="Enter your Email" required>
-                <input type="password" id="password" placeholder="Enter your Password" required>
-                <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                    <input type="checkbox" id="remember-me" style="transform: scale(1.2); margin-right: 5px; margin-top: 0; vertical-align: middle; label: 'Remember Me';">
-                    <label for="remember-me" style="margin-bottom: 15px;margin-left: 4px;">Remember Me</label>
-                </div>                
-                <button type="submit">Login</button>
-            </form>
-        </div>
-        
-        
-        
-
-        <!-- Dashboard -->
-        <div id="dashboard" style="display: none;">
-            <h2>Welcome, <span id="player-id"></span></h2>
-            <div class="tabs">
-                <div class="tab-buttons">
-                    <button class="tab-button active" data-tab="bans">Bans</button>
-                    <button class="tab-button" data-tab="shop">Shop</button>
-                </div>
-                <div class="tab-content active" id="bans">
-                    <h3>Bans</h3>
-                    <div id="bans-list">
-                        <!-- Bans will be displayed here -->
-                    </div>
-                </div>
-                <div class="tab-content" id="shop">
-                    <h3>Shop</h3>
-                    <div id="currency-list">
-                        <!-- Currency will be displayed here -->
-                    </div>
-                </div>
-            </div>
-            <button id="logout-button" style="margin-top: 20px; padding: 10px; background-color: #dc3545; color: #fff; border: none; border-radius: 4px; cursor: pointer;">Logout</button>
-        </div>
+    <div>
+        <form>
+            <label class="formLabel" for="email" >Email</label>
+            <input type="email" id="email" name="email">
+            <label class="formLabel" for="password">Password</label>
+            <input type="password" id="password" name="password">
+            <input type="checkbox" id="rememberMe" name="rememberMe">
+            <label class="formLabel" for="rememberMe">Remember me</label>
+            <input type="submit" value="Submit">
+        </form>
     </div>
-
-    <script>
-        // Selecting Elements
-        const loginSection = document.getElementById('login-section');
-        const dashboard = document.getElementById('dashboard');
-        const loginForm = document.getElementById('login-form');
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-        const messageDiv = document.getElementById('message');
-        const playerIdSpan = document.getElementById('player-id');
-        const bansList = document.getElementById('bans-list');
-        const currencyList = document.getElementById('currency-list');
-        const tabButtons = document.querySelectorAll('.tab-button');
-        const tabContents = document.querySelectorAll('.tab-content');
-        const logoutButton = document.getElementById('logout-button');
-        const rememberMeCheckbox = document.getElementById('remember-me');
-    
-        // Constants
-        const WORKER_URL = 'https://playfab.noobzoidthecrab.workers.dev/';
-    
-        // On page load, check for saved credentials
-        window.onload = () => {
-            const savedEmail = localStorage.getItem('email');
-            const savedPassword = localStorage.getItem('password');
-            if (savedEmail) {
-                emailInput.value = savedEmail;
-            }
-            if (savedPassword) {
-                passwordInput.value = savedPassword;
-            }
-            if (savedEmail && savedPassword) {
-                autoLogin(savedEmail, savedPassword);
-            }
-        };
-    
-        // Auto login function
-        async function autoLogin(email, password) {
-    try {
-        // Clear previous messages and data
-        showMessage('');
-        bansList.innerHTML = '';
-        currencyList.innerHTML = '';
-
-        // Send POST request to Cloudflare Worker
-        const response = await fetch(WORKER_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email, password })
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || 'Failed to fetch player data.');
-        }
-
-        const data = await response.json();
-        console.log("Raw response data:", data);
-
-        // Display the dashboard
-        loginSection.style.display = 'none';
-        dashboard.style.display = 'block';
-
-        // Populate Bans
-        if (data.bans && data.bans.length > 0) {
-            data.bans.forEach(ban => {
-                const banDiv = document.createElement('div');
-                banDiv.classList.add('list-item');
-                banDiv.innerHTML = `
-                    <h4 style="color: white;">Reason: ${ban.reason}</h4>
-                    <p>Ban Date: ${ban.banDate}</p>
-                    <p>Hours Until Unbanned: ${ban.hoursUntilUnbanned}</p>
-                `;
-                bansList.appendChild(banDiv);
-            });
-        } else {
-            bansList.innerHTML = '<p>No bans lol</p>';
-        }
-
-        // Populate Username
-        if (data.username) {
-            playerIdSpan.textContent = `${data.username}!`;
-        }
-
-        // Populate Currency
-        if (data.currency && Object.keys(data.currency).length > 0) {
-            for (const [currencyCode, amount] of Object.entries(data.currency)) {
-                const currencyDiv = document.createElement('div');
-                currencyDiv.classList.add('list-item');
-                currencyDiv.innerHTML = `
-                    <h4>Currency: ${currencyCode}</h4>
-                    <p>Amount: ${amount}</p>
-                `;
-                currencyList.appendChild(currencyDiv);
-            }
-        } else {
-            currencyList.innerHTML = '<p>No currency found.</p>';
-        }
-
-    } catch (error) {
-        // Show detailed ban error if applicable
-        if (error.message.includes("Account is banned")) {
-            showMessage(`Error: ${error.message}`, 'error');
-            bansList.innerHTML = `<div class="list-item"><h4>${error.message}</h4></div>`;
-        } else {
-            showMessage(`Error: ${error.message}`, 'error');
-        }
-    }
-}
-    
-        // Event Listener for Login Form
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = emailInput.value.trim();
-            const password = passwordInput.value.trim();
-    
-            if (!email || !password) {
-                showMessage('Please enter a valid Email and Password.', 'error');
-                return;
-            }
-    
-            // Call the autoLogin function with inputted credentials
-            await autoLogin(email, password);
-    
-            // Save credentials if "Remember Me" is checked
-            if (rememberMeCheckbox.checked) {
-                localStorage.setItem('email', email);
-                localStorage.setItem('password', password);
-            } else {
-                localStorage.removeItem('email');
-                localStorage.removeItem('password');
-            }
-        });
-    
-        // Function to Show Messages
-        function showMessage(message, type = '') {
-            if (type === 'error') {
-                alert(message);
-            } else if (type === 'success') {
-                messageDiv.innerHTML = `<p class="success">${message}</p>`;
-            } else {
-                messageDiv.innerHTML = '';
-            }
-        }
-    
-        // Tab Navigation
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Remove active class from all buttons
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                // Hide all tab contents
-                tabContents.forEach(content => content.classList.remove('active'));
-                // Add active class to the clicked button
-                button.classList.add('active');
-                // Show the corresponding tab content
-                const tab = button.getAttribute('data-tab');
-                document.getElementById(tab).classList.add('active');
-            });
-        });
-    
-        // Logout Functionality
-        logoutButton.addEventListener('click', () => {
-            // Clear input and data
-            emailInput.value = '';
-            passwordInput.value = '';
-            bansList.innerHTML = '';
-            currencyList.innerHTML = '';
-            playerIdSpan.textContent = '';
-            localStorage.removeItem('email');
-            localStorage.removeItem('password');
-            dashboard.style.display = 'none';
-            loginSection.style.display = 'block';
-            showMessage('Logged out successfully.', 'success');
-        });
-    </script>
-    
-
 </body>
 </html>

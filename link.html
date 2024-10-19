@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Subject Account Linker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<h1>Test Subject Account Linker</h1>
+<h2 id="orgScopedIdHeader"></h2>
+
+<script>
+    // Function to decode the Base64 fragment from the URL
+    function decodeFragment() {
+        // Get the URL fragment
+        const fragment = window.location.hash.substring(1); // Remove the '#'
+        if (fragment) {
+            try {
+                // Decode the Base64 token
+                const jsonString = atob(fragment);
+
+                // Parse the JSON string
+                const jsonData = JSON.parse(jsonString);
+
+                // Extract the "org-scoped_id" field
+                const orgScopedId = jsonData["org_scoped_id"];
+
+                // Display the value as a header
+                if (orgScopedId) {
+                    document.getElementById('orgScopedIdHeader').innerText = `Org Scoped ID: ${orgScopedId}`;
+                } else {
+                    document.getElementById('orgScopedIdHeader').innerText = 'Org Scoped ID not found.';
+                }
+            } catch (error) {
+                document.getElementById('orgScopedIdHeader').innerText = 'Error decoding token: ' + error.message;
+            }
+        } else {
+            document.getElementById('orgScopedIdHeader').innerText = 'No fragment provided.';
+        }
+    }
+
+    // Call the function to decode the fragment when the page loads
+    window.onload = decodeFragment;
+</script>
+</body>
+</html>

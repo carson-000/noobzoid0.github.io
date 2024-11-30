@@ -1,6 +1,5 @@
 window.addEventListener("DOMContentLoaded", () => {
     console.log("DOM fully loaded and parsed");
-
     const fragment = window.location.hash.substring(1);
     console.log("Hash Fragment:", fragment);
 
@@ -28,36 +27,44 @@ window.addEventListener("DOMContentLoaded", () => {
         console.log("Org Scoped ID:", orgscoped);
 
         fetch(`https://account.noobzoid.xyz/login/${orgscoped}`)
-            .then(response => {
-                console.log("Fetch Response Status:", response.status);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log("Fetch Response Data:", data);
+    .then(response => {
+        console.log("Fetch Response Status:", response.status);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("Fetch Response Data:", data);
 
-                // Check if the account is banned in the response data
-                if (data.error && data.error.status === "Forbidden" && data.error.error === "AccountBanned") {
-                    const banReasonKey = Object.keys(data.error.errorDetails)[0]; // Get the ban reason key
-                    const banReason = banReasonKey || "Unknown reason"; // Ban reason is the key name
-                    const banTime = data.error.errorDetails[banReason][0]; // Access the first element of the array for the timestamp
-                    
-                    const banDiv = document.getElementById('banned');
-            banDiv.classList.remove('visually-hidden'); // Add the class on button click
+        // Check if the account is banned in the response data
+        if (data.error && data.error.status === "Forbidden" && data.error.error === "AccountBanned") {
+            const banReasonKey = Object.keys(data.error.errorDetails)[0];
+            const banReason = banReasonKey || "Unknown reason";
+            const banTime = data.error.errorDetails[banReason][0];
+            
+            const banDiv = document.getElementById('banned');
+            banDiv.classList.remove('visually-hidden'); // Show ban message
 
-                    // Convert ban time (UTC) to a human-readable format in local time
-                    const formattedBanTime = new Date(banTime).toLocaleString();
+            const formattedBanTime = new Date(banTime).toLocaleString();
+            alert(`Account is banned.\nReason: ${banReason}\nUnban Time: ${formattedBanTime} UTC`);
+        } else {
+            SetItems(data);
+            
+            const loading = document.getElementById('loading');
+            loading.classList.add('visually-hidden'); // Hide loading icon
+            
+            const parent = document.getElementById('parent-container');
+            parent.classList.remove('visually-hidden'); // Show the parent container
+        }
+    })
+    .catch(error => {
+        console.error("Error fetching the URL:", error);
 
-                    alert(`Account is banned.\nReason: ${banReason}\nUnban Time: ${formattedBanTime} UTC`);
-                } else {
-                    SetItems(data);
-                }
-            })
-            .catch(error => {
-                console.error("Error fetching the URL:", error);
-            });
+        // Optionally hide the loading icon in case of an error
+        const loading = document.getElementById('loading');
+        loading.classList.add('visually-hidden');
+    });
     } catch (error) {
         console.error("Error decoding Base64 fragment:", error);
     }
@@ -67,7 +74,6 @@ function SetItems(data) {
     const createdDate = new Date(data.Created);
     const lastLoginDate = new Date(data.lastLogin);
     const username = data.DisplayName;
-    const currencyAmount = data.CURRENCY.data.VirtualCurrency.SS;
 
     // Format the date
     const options = { 
@@ -88,8 +94,6 @@ function SetItems(data) {
     document.getElementById("lastLogin").innerHTML = `<p>Last Login: ${formattedDate2}</p>`;
     
     document.getElementById("displayName").innerHTML = `<p>Hello, ${username}!</p>`;
-    
-    document.getElementById("currencyCount").innerHTML = `<p>You have ${currencyAmount} Seashells!</p>`;
     
     console.log(data.CURRENCY);
 }

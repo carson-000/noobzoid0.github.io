@@ -7,36 +7,112 @@
     <title>Crab Runners Website</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Features-Cards-icons.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="min-width: 100vw;min-height: 100vh;overflow: hidden;background: linear-gradient(-74deg, #ff6b00, #ffa800);">
     <div id="banned" class="visually-hidden" style="width: 100vw;height: 100vh;background: linear-gradient(-39deg, #ff0000, #ff5454);">
         <p class="d-flex justify-content-center align-items-center" style="text-align: center;font-weight: bold;font-size: 382%;height: 100vh;width: 100vw;">You are currently banned.</p>
     </div>
-    <div id="parent-container" style="display:flex;justify-content:center;align-items:center;height:100vh;">
-        <div class="d-xl-flex d-xxl-flex align-self-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="dashboard" style="border-style: solid;width: 81vw;min-height: 400px;border-radius: 13px;display: flex;flex-direction: column;justify-content: flex-start;background: linear-gradient(-64deg, #ff4d00 0%, #ff7134);overflow: hidden;padding: 10px;">
-            <p class="text-center d-xxl-flex align-self-start justify-content-xxl-center align-items-xxl-center" id="displayName" style="width:100%;font-weight:bold;font-size:1.5rem;margin:0;">Hello, USERNAME!</p>
-            <hr style="width:100%;border-width:2px;border-style:solid;">
-            <div style="display:grid;grid-template-rows:auto 1fr;grid-template-columns:1fr;gap:10px;flex-grow:1;width:100%;height:auto;">
-                <div class="flex-column" style="background:rgba(255, 255, 255, 0.8);border-radius:8px;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;font-size:1rem;margin:5px;padding:10px;">
-                    <p class="text-center align-self-start" style="width:100%;margin-top:5px;font-weight:bold;font-size:1.5rem;">Account</p>
-                    <hr style="width:100%;border-width:2px;border-style:solid;margin-top:2px;">
-                    <p id="createdAt" style="width:100%;text-align:center;font-size:1.2rem;">Created At:</p>
-                    <p id="lastLogin" style="width:100%;text-align:center;font-size:1.2rem;">Last Login:</p><button class="btn btn-danger" type="button" style="margin-bottom:5px;width:100%;height:40px;font-size:1rem;">Delete Account</button><button class="btn btn-primary" type="button" style="margin-top:5px;width:100%;height:40px;font-size:1rem;">Export Account Data</button>
+    <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center visually-hidden" id="loading" style="width: 100vw;height: 100vh;">
+        <p style="font-size: 63px;">Loading...</p>
+    </div>
+    <div id="parent-container" style="display: flex;justify-content: center;align-items: center;height: 100vh;">
+        <div class="d-xl-flex d-xxl-flex align-self-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="dashboard" style="border:none;width:81vw;min-height:400px;border-radius:13px;display:flex;flex-direction:column;justify-content:flex-start;background:linear-gradient(-64deg, #ff4d00, #ff7134);overflow:hidden;padding:20px;box-shadow:0 10px 20px rgba(0, 0, 0, 0.15);transition:transform 0.3s ease;">
+            <p class="text-center d-xxl-flex align-self-start justify-content-xxl-center align-items-xxl-center" id="displayName" style="width:100%;font-weight:bold;font-size:1.8rem;margin:0;color:#fff;">Hello, USERNAME!</p>
+            <hr style="width:100%;border-width:2px;border-color:#fff;margin:15px 0;">
+            <div style="display:grid;grid-template-rows:auto 1fr;grid-template-columns:1fr;gap:15px;flex-grow:1;width:100%;height:auto;">
+                <div class="card">
+                    <p class="section-title">Account</p>
+                    <hr class="section-divider">
+                    <p id="createdAt" class="card-info">Created At:</p>
+                    <p id="lastLogin" class="card-info">Last Login:</p>
                 </div>
-                <div class="d-md-flex flex-column justify-content-md-center align-items-md-center" style="background:rgba(255, 255, 255, 0.8);border-radius:8px;display:flex;flex-direction:column;align-items:center;font-size:1rem;margin:5px;padding:10px;">
-                    <p class="text-center" style="width:100%;margin-top:5px;font-weight:bold;font-size:1.5rem;align-self:flex-start;">Inventory</p>
-                    <div style="flex-grow:1;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                        <p id="currencyCount" style="font-size:1.2rem;text-align:center;">You have Seashells</p>
+                <div class="card">
+                    <p class="section-title">Inventory</p>
+                    <hr class="section-divider">
+                    <div class="card-content">
+                        <p id="currencyCount" class="card-info">You have Seashells</p>
                     </div>
                 </div>
-                <div class="d-md-flex flex-column justify-content-md-center align-items-md-center" style="background:rgba(255, 255, 255, 0.8);border-radius:8px;display:flex;flex-direction:column;align-items:center;font-size:1rem;margin:5px;padding:10px;">
-                    <p class="text-center" style="width:100%;margin-top:5px;font-weight:bold;font-size:1.5rem;align-self:flex-start;">Other</p>
-                    <div style="flex-grow:1;display:flex;flex-direction:column;align-items:center;justify-content:center;"><button class="btn btn-primary" type="button" style="margin-bottom:5px;width:100%;height:40px;cursor:not-allowed;font-size:1rem;" title="Not available right now.">Settings</button></div>
+                <div class="card">
+                    <p class="section-title">Other</p>
+                    <hr class="section-divider">
+                    <div class="card-content"><button class="btn" type="button" title="Not available right now.">Settings</button></div>
                 </div>
             </div>
         </div>
-    </div>
+    </div><style>
+    .card {
+        background: linear-gradient(-64deg, rgba(255, 77, 0, 0.9), rgba(255, 113, 52, 0.9));
+        border-radius: 12px;
+        padding: 20px;
+        margin: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25);
+    }
+
+    .section-title {
+        font-weight: bold;
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        align-self: flex-start;
+        color: #fff;
+    }
+
+    .section-divider {
+        width: 100%;
+        border-width: 2px;
+        border-style: solid;
+        border-color: rgba(255, 255, 255, 0.6);
+        margin: 8px 0;
+    }
+
+    .card-info {
+        font-size: 1.2rem;
+        color: #fff;
+        text-align: center;
+        width: 100%;
+    }
+
+    .card-content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn {
+        background-color: rgba(0, 123, 255, 0.9);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 10px;
+        width: 100%;
+        cursor: not-allowed;
+        font-size: 1rem;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 3px 6px rgba(0, 123, 255, 0.2);
+    }
+
+    .btn:hover {
+        background-color: rgba(0, 123, 255, 1);
+        transform: translateY(-2px);
+    }
+
+    #dashboard:hover {
+        transform: translateY(-5px);
+    }
+</style>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/account.js"></script>
 </body>
